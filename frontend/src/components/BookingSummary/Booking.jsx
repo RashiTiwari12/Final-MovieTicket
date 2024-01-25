@@ -27,7 +27,7 @@ import './Booking.css'
             <>
     
                 <Navbar />
-    
+    <h1 className='booking-title'>Booking Summary</h1>
                 {booking.map((i) => (
   <div key={i.id} className='custom-booking-cont'>
     <div className='custom-details'>
