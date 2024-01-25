@@ -85,6 +85,7 @@ class Ticket(models.Model):
 
 
 class Seat(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     theater = models.ForeignKey(Theater, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name="movie")
     seat_number = models.CharField(max_length=10)

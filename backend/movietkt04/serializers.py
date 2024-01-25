@@ -18,7 +18,7 @@ class TheaterSerializer(serializers.ModelSerializer):
 class SeatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Seat
-        exclude = ["seat_numbers"]
+        fields = "__all__"
 
 
 class BookingSerializer(serializers.ModelSerializer):
@@ -33,6 +33,7 @@ class BookingSerializer(serializers.ModelSerializer):
         model = Booking
         fields = [
             "user",
+            "theater",
             "movie",
             "seats",
             "date",

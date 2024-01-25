@@ -26,7 +26,8 @@
     font-size: large;
 }
 .search-container{
-background-color: rgb(77, 174, 239);
+/* background-color: rgb(77, 174, 239); */
+background: transparent;
 margin-top: 2%;
 padding: 55px;
 display: flex;

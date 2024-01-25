@@ -1,8 +1,7 @@
-
-
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
+import './SeatOptions.css'
 
 export default function SeatOptions() {
     const navigate = useNavigate();
@@ -44,9 +43,13 @@ console.log(seatlist);
           const seatNumber = seat.getAttribute('id');
           const isReserved = reservedSeats.some(seat => seat.seat_number === seatNumber);
           seat.style.backgroundColor = isReserved ? 'red' : '';  // Apply red color if reserved
+          seat.style.pointerEvents = isReserved ? 'none' : 'auto';
         });
       }, [reservedSeats]);
     
+
+
+
     const handleClick = (seatNumber, seatCategory, seatPrice) => {
         const isSeatSelected = selectedSeats.some(
             (selectedSeat) => selectedSeat.seat_number === seatNumber
@@ -60,7 +63,8 @@ console.log(seatlist);
         } else {
             setSelectedSeats((prevSeats) => [
                 ...prevSeats,
-                { seat_number: seatNumber, category: seatCategory, price: seatPrice, movie: movie_id, theater: theater_id, is_reserved: true },
+                { seat_number: seatNumber, category: seatCategory,
+                 price: seatPrice, movie: movie_id, theater: theater_id, is_reserved: true },
             ]);
         }
 
@@ -70,13 +74,19 @@ console.log(seatlist);
         }
     };
 
-    // useEffect(() => {
-    //     console.log(selectedSeats[0]);
-    //     console.log(selectedSeats);
-    // }, [selectedSeats]); // Change dependency to selectedSeats
+    useEffect(() => {
+        console.log(selectedSeats[0]);
+        console.log(selectedSeats);
+    }, [selectedSeats]); // Change dependency to selectedSeats
 
     const handleSubmit = () => {
-       
+        if (selectedSeats.length === 0) {
+            alert("Please select at least one seat before booking.");
+            return;
+        }
+
+
+
         console.log("Movie ID:", movie_id);
         console.log("Theater ID:", theater_id);
         const apiUrl = `http://127.0.0.1:8000/api/seats/`;
@@ -91,8 +101,8 @@ console.log(seatlist);
 
             .then((response) => {
                 if (response.status === 201) {
-                    alert("Seats Booked")
-                    navigate("");
+                    navigate(`/${movie_id}/${theater_id}/postbooking/`)
+                    // alert("Seats Booked")
                 } else {
                     alert("Error posting seat data");
                 }
@@ -101,60 +111,23 @@ console.log(seatlist);
                 console.error("Error posting seat data:", error);
             });
     };
-  
-// HANDLE BOOKINGGGG
+    console.log(selectedSeats)
 
-// const seatlist = [];
 
-// for (let i = 0; i < selectedSeats.length; i++) {
-//     seatlist.push(selectedSeats[i].seat_number);
-// }
 
-// console.log(seatlist); 
-
-const seatlist = [];
-for (let i = 0; i < reservedSeats.length; i++) {
-seatlist.push( reservedSeats[i].id);
-}
-console.log(seatlist)
-const seatCost=1000
-const cost = selectedSeats.length * seatCost;
 const id = localStorage.getItem("id");
-function handleBooking () {
-    const apiUrl = `http://127.0.0.1:8000/api/bookings/`;
-    fetch(apiUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user:id, movie:movie_id, theater:theater_id, seats:seatlist, total_cost:cost}),
-    })
-   
-        .then((response) => {
-            if (response.status === 201) {
-                console.log(response)
-                alert("YOUR booking SUMMARY IS GENERTAED")
-                navigate("/bookings/"+id);
-            } else {
-                alert("Error posting booking SUMMARY");
-            }
-        })
-        .catch((error) => {
-            console.error("Error posting booking SUMMARY:", error);
-        });
-};
 
-const handleCombinedClick = () => {
+// const handleCombinedClick = () => {
     // Call both functions
-    handleSubmit();
-    handleBooking();
-  };
+    // handleSubmit();
+    // handleBooking();
+//   };
     return (
         <>
             <Navbar />
-            <h5>hello</h5>
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-                <div>
+            <div className="seat-conatainer">
+             <div className="seat-gold">Category Gold:
+             <div>
                     <span id="A1" className="seat" onClick={() => handleClick("A1", "Gold", 100)}>A1</span>
                 </div>
                 <div>
@@ -169,13 +142,38 @@ const handleCombinedClick = () => {
                 <div>
                     <span id="X4" className="seat" onClick={() => handleClick("X4", "Gold", 100)}>X4</span>
                 </div>
+             </div>
+
+             <div className="seat-silver">Category Silver:
+             <div>
+                    <span id="B1" className="seat" onClick={() => handleClick("B1", "Silver", 200)}>B1</span>
+                </div>
+                <div>
+                    <span id="B2" className="seat" onClick={() => handleClick("B2", "Silver", 200)}>B2</span>
+                </div>
+                <div>
+                    <span id="B3" className="seat" onClick={() => handleClick("B3", "Silver", 200)}>B3</span>
+                </div>
+                <div>
+                    <span id="B4" className="seat" onClick={() => handleClick("B4", "Silver", 200)}>B4</span>
+                </div>
+                <div>
+                    <span id="B5" className="seat" onClick={() => handleClick("B5", "Silver", 200)}>B5</span>
+                </div>
+             </div>
             </div>
-           
-            <button onClick={handleSubmit} >Select Seats</button>
-            <button onClick={handleBooking}  >Get Yor Booking Summary</button>
-            <button onClick={handleCombinedClick}  >PROCEED</button>
-           
-            <Link to={'/bookings/'+id}><button>go to user's booking summary</button> </Link>
+           <div className="seat-select">
+            
+           <button onClick={handleSubmit} className="seat-select-btn" >Book Seats</button>
+            <Link to={`/${movie_id}/${theater_id}/postbooking/`}>
+            </Link> 
+            </div>
+
+            {/* <button onClick={handleBooking}  >Get Yor Booking Summary</button> */}
+            {/* <button onClick={handleCombinedClick}  >PROCEED</button> */}
+            {/* <Link to={`${movie_id}/${theater_id}/bookings/${id}`}>
+                <button>go to user's booking summary</button>
+                 </Link> */}
         </>
     )
 }

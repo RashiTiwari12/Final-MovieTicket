@@ -9,6 +9,7 @@ import TheaterList from './components/TheaterList/TheaterList';
 import BookingSummary from './components/BookingSummary/Booking';
 import UserProfile from './components/UserProfile/UserProfile';
 import SeatOptions from './components/SeatOptions/SeatOptions';
+import PostBooking from './components/PostBooking/PostBooking';
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
             <Route path=':movie_id/tickets/:theater_id' element={<TheaterList />}>
             </Route>
             <Route path='/:movie_id/:theater_id/seats/' element={<SeatOptions />}>
+            </Route>
+            <Route path='/:movie_id/:theater_id/postbooking/' element={<PostBooking />}>
             </Route>
             <Route path='/bookings/:user' element={<BookingSummary />}>
             </Route>

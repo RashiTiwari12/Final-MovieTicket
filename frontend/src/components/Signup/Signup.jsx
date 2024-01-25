@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import './Signup.css'
 const Signup = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        name: "",
+      
         email: "",
         password: "",
         username: "",
@@ -29,7 +29,7 @@ const Signup = () => {
             .then((response) => {
                 console.log(response);
                 if (response.status === 201) {
-                    navigate("/");
+                    navigate("/login");
                 } else {
                     alert("Error signing up");
                 }
@@ -40,16 +40,21 @@ const Signup = () => {
     };
 
     return (
-        <div
+     <>
+<div className="signup-container">
+
+<div   id="signup-form-container"
             className="container d-flex justify-content-center align-items-center vh-100"
-            style={{ maxWidth: "700px" }}>
-            <form onSubmit={handleSubmit} className="p-4 border shadow w-100">
+            style={{ maxWidth: "460px" }}>
+            <form onSubmit={handleSubmit} className="p-4 w-100 mt-5 mb-5" id="signup-form" >
+                <h4>Welcome</h4>
+                <h1>To BOLETO</h1>
                 <div className="mb-3">
-                    <label className="form-label">Name:</label>
+                    <label className="form-label">Username:</label>
                     <input
                         type="text"
-                        name="name"
-                        value={formData.name}
+                        name="username"
+                        value={formData.username}
                         onChange={handleChange}
                         className="form-control"
                         required
@@ -78,23 +83,29 @@ const Signup = () => {
                     />
                 </div>
                 <div className="mb-3">
-                    <label className="form-label">Username:</label>
+                    <label className="form-label"> Confirm Password:</label>
                     <input
-                        type="text"
-                        name="username"
-                        value={formData.username}
+                        type="password"
+                        name="password"
+                        value={formData.password}
                         onChange={handleChange}
                         className="form-control"
                         required
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <div className="signup-btn">
+                <button type="submit" className="btn custom-signup-btn">
                     Sign Up
                 </button>
+                </div>
                 <p> Already have an  account? <Link to={'/login'}>Login here</Link></p>
             </form>
 
         </div>
+</div>
+     
+     
+     </>
     );
 };
 

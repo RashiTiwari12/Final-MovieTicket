@@ -11,7 +11,7 @@ export default function Navbar() {
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
                         <Link to={'/'}>
-                            <h1 className="nav-link active" id='nav-item' >Home</h1>
+                            <h1 className="nav-link active" id='nav-item' style={{ textDecoration: 'none' }} >Home</h1>
                             {/* <p>Home</p> */}
                         </Link>
                     </li>

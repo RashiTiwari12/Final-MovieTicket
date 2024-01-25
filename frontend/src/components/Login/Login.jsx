@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import './Login.css'
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -24,6 +24,7 @@ const Login = () => {
                 localStorage.setItem("access_token", responseData.access_token);
                 localStorage.setItem("refresh_token", responseData.refresh_token);
                 localStorage.setItem("id", responseData.id);
+                localStorage.setItem("username", responseData.username);
                 navigate("/");
             }
         } catch (error) {
@@ -32,41 +33,62 @@ const Login = () => {
     };
 
     return (
-        <div
-            className="container d-flex justify-content-center align-items-center vh-100"
-            style={{ maxWidth: "700px" }}>
-            <form className="p-4 border shadow w-100" onSubmit={handleLogin}>
-                <div className="mb-3">
-                    <label htmlFor="email" className="form-label">
-                        UserName:
-                    </label>
-                    <input
-                        type="text"
-                        id="email"
-                        className="form-control"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label">
-                        Password:
-                    </label>
-                    <input
-                        type="password"
-                        id="password"
-                        className="form-control"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary">
-                    Login
-                </button>
+        <>
+<div  id="login-container">
+<div
 
-                <p> Don't have account? <Link to={'/signup'}>SignUp here</Link></p>
-            </form>
-        </div>
+     id="form-container"
+     className="container d-flex justify-content-center  vh-100"
+     style={{ maxWidth: "450px" }}>
+       
+     <form className="p-5  w-100 mt-5 mb-5" id="form-cont" onSubmit={handleLogin}>
+     <h4>Hello</h4>
+        <h2>Welcome Back</h2>
+         <div className="mb-3">
+             <label htmlFor="email" className="form-label">
+                 UserName:
+             </label>
+             <input
+                 type="text"
+                 id="email"
+                 className="form-control"
+                 value={username}
+                 onChange={(e) => setUsername(e.target.value)}
+             />
+         </div>
+         <div className="mb-3">
+             <label htmlFor="password" className="form-label">
+                 Password:
+             </label>
+             <input
+                 type="password"
+                 id="password"
+                 className="form-control"
+                 value={password}
+                 onChange={(e) => setPassword(e.target.value)}
+             />
+         </div>
+        
+         <div className="d-flex justify-content-between mt-2">
+
+         <p style={{ color: '#74929f' }}>
+            <input type="checkbox"/>
+            Rember Password</p>
+            <p style={{ color: '#74929f' }}>Forget Password</p>
+         </div>
+
+         <div className="login-btn">
+         <button type="submit" className="btn custom-btn">
+             Login
+         </button>
+
+         </div>
+        
+         <p> Don't have account? <Link to={'/signup'}>SignUp now</Link></p>
+     </form>
+ </div>
+ </div>
+        </>
     );
 };
 

@@ -2,17 +2,10 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 // import cinemaImage from './cinema02.jpg';
-
+import './TheaterList.css'
 
 export default function TheaterList() {
-    const divStyle = {
-        // backgroundImage: `url(${cinemaImage})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        height: '500px',
-        color: "white",
-        padding: "100px"
-    };
+   
     const [theaters, settheaters] = useState([])
     const params = useParams();
     const movie_id = params.movie_id;
@@ -41,7 +34,7 @@ export default function TheaterList() {
             {/* <img src={cinemaImage} alt="Cinema" /> */}
 
             {theaters.map((i) => (
-                <div className="col" key={i.id}>
+                <div className="col" id='theater-list-cont' key={i.id}>
                     <div className="btn-group-vertical" role="group" aria-label="Vertical button group">
                         <Link to={`/${movie_id}/${i.id}/seats/`}>
 
