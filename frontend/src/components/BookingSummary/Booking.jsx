@@ -35,6 +35,7 @@ import './Booking.css'
       <h5 className="custom-title">user ID: {i.user}</h5>
       <p className="custom-text">
         Movie Title: {i.movie.title} {/* Accessing movie title */}
+        <p>Theater ID:{i.theater}</p>
         <p>Number of seats: {i.seats.length}</p>
         {/* <p>Seat numbers: {i.seats.map((seat) => seat.seat_number).join(', ')}</p> */}
         {i.isconfirmed ? (

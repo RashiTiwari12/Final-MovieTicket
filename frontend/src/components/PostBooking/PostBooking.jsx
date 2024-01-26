@@ -9,31 +9,31 @@ export default function PostBooking() {
   const movie_id = params.movie_id;
   const theater_id = params.theater_id;
   const id = localStorage.getItem("id");
-  const [reservedSeats, setReservedSeats] = useState([]);
+  const [userReservedSeats, setuserReservedSeats] = useState([]);
 
-  const fetchReservedSeats = async () => {
+  const fetchuserReservedSeats = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/seats/${theater_id}?is_reserved=true`+ theater_id);
+      const response = await fetch(`http://127.0.0.1:8000/api/seatsuser/`+ id+"/"+theater_id);
       const data = await response.json();
       console.log(data); // Log the data here
-      setReservedSeats(data);
+      setuserReservedSeats(data);
     } catch (error) {
       console.error('Error fetching reserved seats data:', error);
     }
   };
   
-console.log(reservedSeats)
+console.log(userReservedSeats)
   useEffect(() => {
-    fetchReservedSeats();
+    fetchuserReservedSeats();
   }, []);
 
-  const seatIdlist = reservedSeats.map(seat => seat.id);
+  const seatIdlist = userReservedSeats.map(seat => seat.id);
   console.log(seatIdlist);
 
 
    let totalCost = 0;
-for (let i = 0; i < reservedSeats.length; i++) {
-    totalCost += reservedSeats[i].price;
+for (let i = 0; i < userReservedSeats.length; i++) {
+    totalCost += userReservedSeats[i].price;
 }
 
   const handleBooking = () => {

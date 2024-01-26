@@ -11,6 +11,9 @@ urlpatterns = [
     path("seats/", PostSeatview.as_view(), name="post-seats"),
     path("seats/<int:theater>/", Seatview.as_view(), name="get-seats"),
     path(
+        "seatsuser/<int:user>/<int:theater>/", SeatUserView.as_view(), name="get-seats"
+    ),
+    path(
         "theaters/<int:theater>/seats/<int:seat_id>/",
         SeatDetailView.as_view(),
         name="put-seat-detail",

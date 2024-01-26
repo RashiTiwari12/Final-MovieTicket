@@ -86,7 +86,7 @@ console.log(seatlist);
         }
 
 
-
+        const token = localStorage.getItem("access_token");
         console.log("Movie ID:", movie_id);
         console.log("Theater ID:", theater_id);
         const apiUrl = `http://127.0.0.1:8000/api/seats/`;
@@ -94,7 +94,8 @@ console.log(seatlist);
         fetch(apiUrl, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json", 
+                 Authorization: `Bearer ${token}` ,
             },
             body: JSON.stringify(selectedSeats),
         })

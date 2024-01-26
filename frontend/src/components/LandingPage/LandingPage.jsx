@@ -126,6 +126,7 @@ const LandingPage = () => {
                                     <option value="bhopal">Bhopal</option>
                                     <option value="indore">Indore</option>
                                     <option value="indore">Kolkata</option>
+                                    <option value="delhi">Delhi</option>
                                     <option value=""></option>
                                     {/* Add city options here */}
                                 </select>

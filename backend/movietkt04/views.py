@@ -169,11 +169,41 @@ class Ticketview(APIView):
             return Response({"error": str(e)}, status=500)
 
 
+class SeatUserView(APIView):
+    def get(self, request, user, theater):
+        seats = Seat.objects.filter(user=user, theater=theater)
+        serializer = SeatSerializer(seats, many=True).data
+        return Response(serializer)
+
+
 class Seatview(APIView):
     def get(self, request, theater):
         seats = Seat.objects.filter(theater=theater)
         serializer = SeatSerializer(seats, many=True).data
         return Response(serializer)
+
+
+# class PostSeatview(APIView):
+#     permission_classes = [IsAuthenticated]
+
+#     def get(self, request):
+#         seats = Seat.objects.all()
+#         serializer = SeatSerializer(seats, many=True)
+#         return Response(serializer.data)
+
+# def post(self, request):
+#     data = request.data
+
+#     if isinstance(data, list):
+#         serializer = SeatSerializer(data=data, many=True)
+#     else:
+#         serializer = SeatSerializer(data=data)
+
+#     if serializer.is_valid():
+#         serializer.save()
+#         print(serializer)
+#         return Response({"message": "seat reserved"}, status=201)
+#     return Response(serializer.errors, status=400)
 
 
 class PostSeatview(APIView):
@@ -183,17 +213,20 @@ class PostSeatview(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+        user = request.user
         data = request.data
 
+        # Ensure user is included in each seat data
         if isinstance(data, list):
-            serializer = SeatSerializer(data=data, many=True)
+            for seat_data in data:
+                seat_data["user"] = user.id
         else:
-            serializer = SeatSerializer(data=data)
+            data["user"] = user.id
 
+        serializer = SeatSerializer(data=data, many=isinstance(data, list))
         if serializer.is_valid():
             serializer.save()
-            print(serializer)
-            return Response({"message": "seat reserved"}, status=201)
+            return Response({"message": "Seat reserved"}, status=201)
         return Response(serializer.errors, status=400)
 
 
