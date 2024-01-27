@@ -4,10 +4,10 @@ import Navbar from '../Navbar/Navbar';
 import './UserProfile.css'
 export default function UserProfile() {
     const [booking, setbooking] = useState([])
-
+    const id = localStorage.getItem("id");
     useEffect(() => {
 
-        fetch("http://127.0.0.1:8000/api/bookings/")
+        fetch("http://127.0.0.1:8000/api/bookings/"+ id)
             .then((res) => res.json())
             .then((results) => {
                 setbooking(results);
@@ -32,6 +32,7 @@ export default function UserProfile() {
       <h5 className="custom-title">user ID: {i.user}</h5>
       <p className="custom-text">
       Movie Title: {i.movie.title} {/* Accessing movie title */}
+      <p>Theater ID:{i.theater}</p>
         <p>Number of seats: {i.seats.length}</p>
         {/* <p>Seat numbers: {i.seats.map((seat) => seat.seat_number).join(', ')}</p> */}
         {i.isconfirmed ? (
