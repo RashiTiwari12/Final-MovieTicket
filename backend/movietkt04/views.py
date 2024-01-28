@@ -97,6 +97,10 @@ class Movieview(APIView):
 
         return Response(serializer)
 
+
+class MoviePostview(APIView):
+    permission_classes = [IsAdminUser]
+
     def post(self, request):
         data = request.data
         # data["movie_id"] = request.user.id

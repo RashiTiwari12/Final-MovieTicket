@@ -45,7 +45,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
         ) : (
           <div>Not confirmed</div>
         )}
-        Total cost: {i.total_cost}
+        Total cost: ${i.total_cost}
         <p>{i.date}</p>
         <p>{i.movie_timing}</p>
       </p>

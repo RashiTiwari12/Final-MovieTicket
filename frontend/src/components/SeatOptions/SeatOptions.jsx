@@ -127,7 +127,7 @@ const id = localStorage.getItem("id");
         <>
             <Navbar />
             <div className="seat-conatainer">
-             <div className="seat-gold">Category Gold:
+             <div className="seat-gold">Category Gold($100):
              <div>
                     <span id="A1" className="seat" onClick={() => handleClick("A1", "Gold", 100)}>A1</span>
                 </div>
@@ -145,7 +145,7 @@ const id = localStorage.getItem("id");
                 </div>
              </div>
 
-             <div className="seat-silver">Category Silver:
+             <div className="seat-silver">Category Silver($200):
              <div>
                     <span id="B1" className="seat" onClick={() => handleClick("B1", "Silver", 200)}>B1</span>
                 </div>

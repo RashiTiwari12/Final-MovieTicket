@@ -39,7 +39,7 @@ export default function SpecificMovie() {
                 <div className='movie-content'>
                 <h5 className="movie-title">{movies.title}</h5>
                 <p className="lang-text">{movies.language}</p>
-                        <p className="genre-text">{movies.genre}</p>
+                        <p className="genre-text">{movies.genre}</p><span className="lang-text">Rating:{movies.rating}</span>
                        
                         {/* <p >{movies.release_date}</p> */}
                         <p className="lang-text">🕛{movies.runtime}</p>
