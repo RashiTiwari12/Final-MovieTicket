@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import './Booking.css'
+import MyDocument from './pdf';
+import { PDFDownloadLink } from '@react-pdf/renderer';
    
    
  export default function BookingSummary() {
@@ -31,7 +33,7 @@ import './Booking.css'
                 {booking.map((i) => (
   <div key={i.id} className='custom-booking-cont'>
     <div className='custom-details'>
-    <h5 className="custom-title">Username: {username}</h5>
+    {/* <h5 className="custom-title">Username: {username}</h5> */}
       <h5 className="custom-title">user ID: {i.user}</h5>
       <p className="custom-text">
         Movie Title: {i.movie.title} {/* Accessing movie title */}
@@ -43,7 +45,7 @@ import './Booking.css'
         ) : (
           <div>Not confirmed</div>
         )}
-        {i.total_cost}
+        Total cost: {i.total_cost}
         <p>{i.date}</p>
         <p>{i.movie_timing}</p>
       </p>
@@ -55,11 +57,14 @@ import './Booking.css'
     </div>
     </div>
     
+    <PDFDownloadLink document={<MyDocument movieTitle={i.movie.title} seatDetail={i.isconfirmed} seatDetail2={i.total_cost} movie_timing={i.movie_timing}/>} fileName="document.pdf">
+      {({ blob, url, loading, error }) => 
+        loading ? 'Loading document...' : 'Download now!'
+      }
+    </PDFDownloadLink>
   </div>
 ))}
-                <div className="container">
-    
-                </div>
+               
             </>
         )
     }

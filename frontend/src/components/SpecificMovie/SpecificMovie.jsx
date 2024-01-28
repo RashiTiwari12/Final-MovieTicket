@@ -45,20 +45,7 @@ export default function SpecificMovie() {
                         <p className="lang-text">🕛{movies.runtime}</p>
                 </div>
               
-
-              
                 </div>
-            {/* <div className="container">
-                
-                <div className="card" style={{ width: "18rem", marginLeft: "10%" }}>
-                    <img src={movies.img} className="card-img-top" alt="..." />
-                    <div className="card-body">
-                        <h5 className="card-title">{movies.title}</h5>
-                        <p className="card-text">{movies.genre}</p>
-                        <p className="card-text">{movies.language}</p>
-                        <p className="card-text">{movies.runtime}</p>
-                    </div>
-                </div> */}
                 
 <div className='book-btn-div'>  {isAuthenticated ? (
                     <Link to={`/${movie_id}/tickets/${movies.id}`}>
@@ -71,9 +58,7 @@ export default function SpecificMovie() {
                 )}</div>
              
 
-            
-            {/* </div> */}
-            
+           
         </>
     );
 }

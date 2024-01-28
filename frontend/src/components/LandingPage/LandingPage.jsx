@@ -182,9 +182,15 @@ const LandingPage = () => {
                                     {/* <p className="card-text">
                                         {i.genre}
                                     </p> */}
-                                    <p className="card-text">
-                                       🍿 {i.popcorn_rating} 🍅{i.tomato_rating}
+                                    <div className='ratings-div'>
+                                    <p className="card-text" id='ratings'>
+                                       🍿 {i.popcorn_rating} 
                                     </p>
+                                    <p className="card-text" id='ratings'>
+                                        🍅{i.tomato_rating}
+                                    </p>
+                                    </div>
+                                   
                                    
                                 </div>
                              </div>

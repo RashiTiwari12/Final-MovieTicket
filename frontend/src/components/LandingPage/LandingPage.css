@@ -81,5 +81,13 @@ background-color: #191939;
     margin-left: 35%;
     border-radius: 0.5rem; /* Add the unit 'rem' for border-radius */
 }
-
+.ratings-div{
+    display: flex;
+    justify-content: space-between;
+}
+#ratings{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
